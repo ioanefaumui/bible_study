@@ -6,7 +6,7 @@ export default function Header() {
   const { user, loginWithGoogle, logOut } = useContext(UserContext);
 
   return (
-    <header className="flex p-4 items-center justify-between border-b border-b-indigo-100 bg-white">
+    <header className="sticky top-0 w-full flex p-4 items-center justify-between border-b border-b-indigo-100 bg-white">
       <Link to="/">LOGO</Link>
       <nav>
         {user ? (

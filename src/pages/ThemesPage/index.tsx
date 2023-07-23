@@ -20,6 +20,13 @@ export default function ThemesPage() {
       <button className="font-bold text-white p-4 rounded-md bg-indigo-500 mt-4">
         Adicionar tema
       </button>
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="Buscar tema"
+        className="block p-4 rounded-md w-full leading-none outline-none focus:ring-4 focus:ring-offset-8"
+      />
       <ul className="flex flex-col gap-2 mt-4">
         {theme.map((theme) => (
           <li key={theme.name}>
