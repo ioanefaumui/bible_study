@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 export default function Header() {
-  const { user, loginWithGoogle, logOut } = useContext(UserContext)!;
+  const { user, loginWithGoogle, logOut } = useContext(UserContext);
 
   return (
-    <header className="p-4 bg-indigo-950 text-white flex items-center justify-between">
+    <header className="flex p-4 items-center justify-between border-b border-b-indigo-100 bg-white">
       <Link to="/">LOGO</Link>
       <nav>
         {user ? (
@@ -14,7 +14,10 @@ export default function Header() {
             Logout
           </button>
         ) : (
-          <button onClick={loginWithGoogle} className="px-2 py-1 rounded bg-cyan-600">
+          <button
+            onClick={loginWithGoogle}
+            className="px-2 py-1 rounded bg-cyan-600"
+          >
             Login
           </button>
         )}

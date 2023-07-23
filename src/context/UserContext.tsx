@@ -24,9 +24,14 @@ const INITIAL_USER_CONTEXT: IUserContext = {
 
 export const UserContext = createContext<IUserContext>(INITIAL_USER_CONTEXT);
 
-export function UserContextProvider({ children }: { children: React.ReactNode }) {
+export function UserContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [user, setUser] = useState<IUserContext["user"]>(null);
-  const [loadingUser, setLoadingUser] = useState<IUserContext["loadingUser"]>(true);
+  const [loadingUser, setLoadingUser] =
+    useState<IUserContext["loadingUser"]>(true);
 
   const loginWithGoogle: IUserContext["loginWithGoogle"] = () => {
     const provider = new GoogleAuthProvider();
@@ -38,8 +43,13 @@ export function UserContextProvider({ children }: { children: React.ReactNode })
   };
 
   useEffect(() => {
+    let loader: NodeJS.Timeout;
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoadingUser(false);
+      loader = setTimeout(() => {
+        setLoadingUser(false);
+      }, 1000);
+
       if (currentUser) {
         setUser(currentUser);
       } else {
@@ -48,6 +58,7 @@ export function UserContextProvider({ children }: { children: React.ReactNode })
     });
 
     return () => {
+      clearTimeout(loader);
       unsubscribe();
     };
   }, [user]);
